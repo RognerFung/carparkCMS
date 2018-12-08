@@ -1,0 +1,9 @@
+<mat-list-item>Are you sure to delete these clients?</mat-list-item>
+<mat-nav-list fxLayout="row" fxLayoutGap="10px">
+    <span>ClientID = </span>
+    <span *ngFor="let client of data">{{client.ClientID}} </span>
+</mat-nav-list>
+<mat-nav-list fxLayout="row" fxLayoutGap="10px">
+    <button fxFlex="20" mat-raised-button (click)="closeSheet()">Cancel</button>
+    <button fxFlex="20" mat-raised-button (click)="confirm()">Confirm</button>
+</mat-nav-list>

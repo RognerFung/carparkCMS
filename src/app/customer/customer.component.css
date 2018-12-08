@@ -1,0 +1,44 @@
+table {
+    width: 100%;
+    background-color: #E3F2FD;
+}
+
+button {
+    background-color: #F5F5F5;
+}
+
+.hint {
+    margin-left: 10px;
+    font-family: "Roboto","Helvetica Neue",sans-serif;
+    color: "warn";
+}
+
+.ContainerCard {
+    margin-bottom: 20px;
+    background-color: #E3F2FD;
+}
+
+.container {
+    width: 95%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: auto; 
+    margin-right: auto;
+}
+
+.gridInput {
+    width: 100%;
+}
+
+.closeButton {
+    float: right;
+}
+
+.checkField {
+    position: absolute;
+    left: 5px;
+}
+
+.buttonToolbar {
+    background-color: #E3F2FD;
+}

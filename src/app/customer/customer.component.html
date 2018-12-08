@@ -1,0 +1,74 @@
+<div class="container">
+    <mat-card id="customerDetail" *ngIf="showDetail" class="ContainerCard">
+        <mat-card-header>
+            <mat-card-title>Customer Detail</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-grid-list cols="12" rowHeight="80px">
+                <mat-grid-tile *ngFor="let tile of customerTiles" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background]="tile.color">
+                    <mat-form-field class="gridInput">
+                        <input matInput name="{{tile.label}}" placeholder="{{tile.label}}" [(ngModel)]="tile.value" disabled="{{!showEdit}}">
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </mat-card-content>
+        <mat-card-actions>
+            <button *ngIf="!showEdit" mat-raised-button (click)="editDetail()">Edit</button>
+            <button *ngIf="showEdit" mat-raised-button (click)="resetDetail()">Reset</button>
+            <button mat-raised-button (click)="submitDetail()" disabled="{{!showEdit}}">Submit</button>
+            <button class="closeButton" mat-raised-button (click)="closeDetail()">Close</button>
+        </mat-card-actions>
+    </mat-card>
+    <mat-toolbar class="buttonToolbar" fxLayout="row" fxLayoutGap="10px">
+        <button fxFlex="5" mat-raised-button (click)="addCustomer()">Add</button>
+        <button fxFlex="5" mat-raised-button (click)="selectCustomer()">View</button>
+        <button fxFlex="5" mat-raised-button (click)="editCustomer()">Edit</button>
+        <button fxFlex="5" mat-raised-button (click)="deleteCustomer()">Delete</button>
+        <mat-hint fxFlex="60" [ngStyle]="{color: '#FF1744'}">
+            <span class="hint" [hidden]="!err">{{err}}</span>
+        </mat-hint>
+    </mat-toolbar>
+    <mat-paginator #paginatorTop [length]="page.length" [pageSize]="page.pageSize" [pageSizeOptions]="page.pageSizeOptions" 
+        (page)="pageEvent = pageChange($event)">
+    </mat-paginator>
+
+    <table *ngIf="dataSource" mat-table matSort (matSortChange)="sortChange($event)" [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="Select">
+            <th mat-header-cell *matHeaderCellDef> Select </th>
+            <td mat-cell *matCellDef="let element">
+                <section>
+                    <mat-checkbox [(ngModel)]="element.select"></mat-checkbox>
+                </section>
+            </td>
+        </ng-container>
+        
+        <ng-container *ngFor="let field of fields" matColumnDef="{{field}}">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="{{field}}"> {{field}} </th>
+            <td mat-cell *matCellDef="let element"> {{element[field]}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    </table>
+
+    <mat-paginator #paginatorBottom [length]="page.length" [pageSize]="page.pageSize" [pageSizeOptions]="page.pageSizeOptions" 
+        (page)="pageEvent = pageChange($event)">
+    </mat-paginator>
+
+    <mat-card class="ContainerCard">
+        <mat-card-header>
+            <mat-card-title>Choose Fields</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-grid-list cols="9" rowHeight="40px">
+                <mat-grid-tile *ngFor="let field of allFields" [colspan]="1" [rowspan]="1">
+                    <mat-checkbox class="checkField" [(ngModel)]="field.select">{{field.field}}</mat-checkbox>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button (click)="fieldChange()">Choose</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

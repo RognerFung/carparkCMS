@@ -1,0 +1,33 @@
+<mat-card *ngIf="!isIn" class="loginCard">
+    <mat-card-header>Log In</mat-card-header>
+    <form novalidate [formGroup]="loginForm" #fform="ngForm" (ngSubmit)="login()" class="login-form">
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
+            <mat-form-field class="section-width">
+                <input matInput name="Email" type="text" placeholder="Email" formControlName="Email" required>
+                <mat-hint>
+                    <span [hidden]="!(formErrors.Email)">{{formErrors.Email}}</span>
+                </mat-hint>
+                <mat-error *ngIf="loginForm.controls.Email.hasError('required')">
+                    Email is required
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="section-width">
+                <input matInput name="Password" type="Password" placeholder="Password" formControlName="Password" required>
+                <mat-hint>
+                    <span [hidden]="!(formErrors.Password)">{{formErrors.Password}}</span>
+                </mat-hint>
+                <mat-error *ngIf="loginForm.controls.Password.hasError('required')">
+                    Password is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="end end">
+            <button type="submit" mat-raised-button class="background-accent text-floral-white" [disabled]="loginForm.invalid">Submit</button>
+        </div>
+    </form>
+</mat-card>
+<mat-card *ngIf="isIn" class="logoutCard">
+    <mat-card-header>Log Out</mat-card-header>
+    <button mat-raised-button (click)="logout()">Logout</button>
+</mat-card>
+  

@@ -1,1 +1,1 @@
-export const baseURL = 'http://biddit.sg:4000/';
+export const baseURL = 'https://biddit.sg:4443/';
